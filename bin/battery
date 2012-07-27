@@ -43,7 +43,7 @@ battery_status()
 {
 case $(uname -s) in
     "Linux")
-        BATPATH=/sys/class/power_supply/BAT0
+        BATPATH=${BATPATH:-/sys/class/power_supply/BAT0}
         STATUS=$BATPATH/status
         BAT_FULL=$BATPATH/energy_full
         BAT_NOW=$BATPATH/energy_now
