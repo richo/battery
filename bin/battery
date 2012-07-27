@@ -45,8 +45,13 @@ case $(uname -s) in
     "Linux")
         BATPATH=${BATPATH:-/sys/class/power_supply/BAT0}
         STATUS=$BATPATH/status
-        BAT_FULL=$BATPATH/energy_full
-        BAT_NOW=$BATPATH/energy_now
+        if [ -f "$BATPATH/energy_full" ]; then
+            naming="energy"
+        elif [ -f "$BATPATH/charge_full" ]; then
+            naming="charge"
+        fi
+        BAT_FULL=$BATPATH/${naming}_full
+        BAT_NOW=$BATPATH/${naming}_now
         if [ "$1" = `cat $STATUS` -o "$1" = "" ]; then
             linux_get_bat
         fi
