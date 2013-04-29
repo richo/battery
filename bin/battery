@@ -30,8 +30,7 @@ linux_get_bat ()
 
 freebsd_get_bat ()
 {
-    echo "$(sysctl -n hw.acpi.battery.life)"
-
+    sysctl -n hw.acpi.battery.life
 }
 
 # Do with grep and awk unless too hard
