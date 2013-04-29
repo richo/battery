@@ -25,8 +25,7 @@ linux_get_bat ()
 {
     bf=$(cat $BAT_FULL)
     bn=$(cat $BAT_NOW)
-    BAT=`echo "100 * $bn / $bf" | bc`
-    echo $BAT
+    echo $(( 100 * $bn / $bf ))
 }
 
 freebsd_get_bat ()
@@ -106,7 +105,7 @@ case $(uname -s) in
                 ;;
             esac
             if [[ -n "$maxcap" && -n $curcap ]]; then
-                echo "100 * $curcap / $maxcap" | bc
+                echo $(( 100 * $curcap / $maxcap ))
                 break
             fi
         done
