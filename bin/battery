@@ -50,6 +50,9 @@ case $(uname -s) in
             naming="energy"
         elif [ -f "$BATPATH/charge_full" ]; then
             naming="charge"
+        elif [ -f "$BATPATH/capacity" ]; then
+            cat "$BATPATH/capacity"
+            return 0
         fi
         BAT_FULL=$BATPATH/${naming}_full
         BAT_NOW=$BATPATH/${naming}_now
