@@ -93,7 +93,7 @@ case $(uname -s) in
                 "CurrentCapacity")
                     export curcap=$value;;
                 "ExternalConnected")
-                    if [ "$ext" != "$value" ]; then
+                    if [ ! -z "$ext" ] && [ "$ext" != "$value" ]; then
                         exit
                     fi
                 ;;
