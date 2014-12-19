@@ -28,6 +28,14 @@ linux_get_bat ()
     echo $(( 100 * $bn / $bf ))
 }
 
+
+openbsd_get_bat ()
+{
+    bf=$(echo `sysctl -n hw.sensors.acpibat0.amphour0 |  cut -d ' ' -f 1`)
+    bn=$(echo `sysctl -n hw.sensors.acpibat0.amphour3 |  cut -d ' ' -f 1`)
+    echo "(($bn * 100) / $bf)" | bc -l | awk -F '.' '{ print $1 }';
+}
+
 freebsd_get_bat ()
 {
     sysctl -n hw.acpi.battery.life
@@ -73,6 +81,9 @@ case $(uname -s) in
                 freebsd_get_bat
                 ;;
         esac
+        ;;
+    "OpenBSD")
+        openbsd_get_bat
         ;;
     "Darwin")
         case $1 in
